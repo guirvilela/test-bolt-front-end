@@ -5,7 +5,7 @@ import { ArrowRightLeft, Plus } from "lucide-react";
 import React from "react";
 
 interface CardTransactionProps {
-  activeOperation: "deposit" | "transfer";
+  activeOperation: "deposit" | "transfer" | "received";
   amount: string;
   recipientId?: string;
   errors: string[];
@@ -25,23 +25,19 @@ export function CardTransaction({
   onActiveOperation,
   onSubmit,
 }: CardTransactionProps) {
-  const handleActiveOperationChange = (value: string) => {
-    onActiveOperation(value as "deposit" | "transfer");
-  };
-
   const options = React.useMemo(
     () => [
       { value: "deposit", label: "Depósito" },
       { value: "transfer", label: "Transferência" },
     ],
-    []
+    [activeOperation]
   );
 
   return (
     <section className=" p-6 pt-0 space-y-4">
       <Select
         value={activeOperation}
-        onChange={handleActiveOperationChange}
+        onChange={(v) => onActiveOperation(v as "deposit" | "transfer")}
         options={options}
       />
 

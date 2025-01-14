@@ -1,8 +1,8 @@
-import { Operation as OperationProp } from "@/hooks/dashboard";
+import { OperationHistory } from "@/hooks/dashboard";
 import { formatCurrency } from "@/lib/currency";
 
 interface OperationProps {
-  operation: OperationProp;
+  operation: OperationHistory;
 }
 
 export function Operation({ operation }: OperationProps) {
@@ -13,10 +13,22 @@ export function Operation({ operation }: OperationProps) {
           ? "Reversão de operação"
           : operation.type === "deposit"
           ? "Depósito"
-          : `Transferência para ${operation.recipient}`}
+          : operation.type === "received"
+          ? `Transferência recebida de ${operation.senderName}`
+          : `Transferência para ${operation.recipientName}`}
       </p>
-      <p className="text-background-primary font-medium text-xl">
-        {formatCurrency(operation.amount)}
+      <p
+        className={`text-xl font-medium ${
+          operation.type === "deposit" || operation.type === "received"
+            ? "text-green-500"
+            : operation.type === "transfer"
+            ? "text-red-500"
+            : ""
+        }`}
+      >
+        {operation.type === "deposit" || operation.type === "received"
+          ? `+${formatCurrency(operation.amount)}`
+          : `-${formatCurrency(operation.amount)}`}
       </p>
       <p className="text-sm text-gray-400 mt-1">
         {new Date(operation.timestamp).toLocaleString()}

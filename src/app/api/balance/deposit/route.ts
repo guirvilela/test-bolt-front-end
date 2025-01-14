@@ -35,15 +35,19 @@ export async function POST(req: Request) {
       user.id,
     ]);
 
-    await pool.execute(
-      "INSERT INTO operations (user_id, type, amount, balance_after) VALUES (?, ?, ?, ?)",
+    // Inserindo operação de depósito
+    const [operationRows]: any = await pool.execute(
+      "INSERT INTO operations (userId, type, amount, balanceAfter) VALUES (?, ?, ?, ?)",
       [user.id, "deposit", deposit, newBalance]
     );
 
+    const operationId = (operationRows as any).insertId;
+
     return new Response(
       JSON.stringify({
-        id: user.id,
-        name: user.username,
+        id: operationId,
+        userId: user.id,
+        username: user.username,
         email: user.email,
         balance: newBalance,
       }),

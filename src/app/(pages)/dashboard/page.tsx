@@ -4,6 +4,7 @@ import { CardOperations } from "@/components/dashboard/card-operations";
 import { CardTransaction } from "@/components/dashboard/card-transactions";
 import { Wallet } from "@/components/dashboard/wallet";
 import { Button } from "@/components/ui/button";
+import { useAuthContext } from "@/context/authContext";
 import { useDashboardController } from "@/hooks/dashboard";
 import { ArrowRightLeft, BadgePlus } from "lucide-react";
 import Link from "next/link";
@@ -26,6 +27,8 @@ export default function Dashboard() {
     handleSetRecipientId,
   } = useDashboardController();
 
+  const { user } = useAuthContext();
+
   return (
     <div className=" flex flex-col gap-3 max-w-7xl mx-auto p-8 h-screen">
       <div className="flex items-center justify-between">
@@ -40,7 +43,7 @@ export default function Dashboard() {
 
       <header className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900">
-          Dashboard Financeiro
+          Dashboard Financeira de {user?.username}
         </h1>
 
         <Wallet value={balance} />

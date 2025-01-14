@@ -2,7 +2,7 @@ import { pool } from "@/lib/db";
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
-  const userId = url.searchParams.get("userId"); // Alinhar com o frontend
+  const userId = url.searchParams.get("userId");
 
   if (!userId) {
     return new Response(
@@ -12,12 +12,12 @@ export async function GET(req: Request) {
   }
 
   try {
-    const [rows]: any = await pool.execute(
-      "SELECT * FROM operations WHERE user_id = ? ORDER BY timestamp DESC",
+    const [operations]: any = await pool.execute(
+      "SELECT * FROM operations WHERE userId = ? ORDER BY timestamp DESC",
       [userId]
     );
 
-    if (!rows || rows.length === 0) {
+    if (!operations || operations.length === 0) {
       return new Response(
         JSON.stringify({
           message: "Nenhuma operação do usuário foi encontrada",
@@ -26,7 +26,42 @@ export async function GET(req: Request) {
       );
     }
 
-    return new Response(JSON.stringify({ operations: rows }), { status: 200 });
+    const operationsWithNames = await Promise.all(
+      operations.map(async (operation: any) => {
+        let senderName = null;
+        let recipientName = null;
+
+        if (operation.senderId) {
+          const [senderRows]: any = await pool.execute(
+            "SELECT username FROM users WHERE id = ?",
+            [operation.senderId]
+          );
+          senderName =
+            senderRows.length > 0 ? senderRows[0].username : "Desconhecido";
+        }
+
+        if (operation.recipient_id) {
+          const [recipientRows]: any = await pool.execute(
+            "SELECT username FROM users WHERE id = ?",
+            [operation.recipient_id]
+          );
+          recipientName =
+            recipientRows.length > 0
+              ? recipientRows[0].username
+              : "Desconhecido";
+        }
+
+        return {
+          ...operation,
+          senderName,
+          recipientName,
+        };
+      })
+    );
+
+    return new Response(JSON.stringify({ operations: operationsWithNames }), {
+      status: 200,
+    });
   } catch (error) {
     console.error("Erro ao buscar operações:", error);
     return new Response(

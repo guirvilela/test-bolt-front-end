@@ -23,7 +23,6 @@ export async function GET(req: Request) {
         { status: 404 }
       );
     }
-
     return new Response(JSON.stringify(rows[0]), { status: 200 });
   } catch (error) {
     console.error("Erro ao buscar usuário:", error);
