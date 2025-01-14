@@ -79,7 +79,7 @@ export function useHomeController() {
         body: JSON.stringify({ username, password, email }),
       });
 
-      const data: User = await res.json();
+      const data = await res.json();
 
       if (res.ok) {
         router.push("/dashboard");
@@ -91,7 +91,9 @@ export function useHomeController() {
         setLoading(false);
         setIsRegister(false);
       } else {
-        setError("Erro ao registrar. Tente novamente.");
+        const errorMessage =
+          data.message || "Erro ao registrar. Tente novamente.";
+        setError(errorMessage);
       }
     } catch (err) {
       setError("Erro ao se conectar com o servidor");
@@ -128,6 +130,13 @@ export function useHomeController() {
     [isRegister]
   );
 
+  const onClearFields = React.useCallback(() => {
+    setError("");
+    setEmail("");
+    setUsername("");
+    setPassword("");
+  }, [email, password, username, error]);
+
   const handleSubmit = React.useCallback(
     (e: React.FormEvent) => {
       if (isRegister) {
@@ -147,6 +156,7 @@ export function useHomeController() {
     error,
     loading,
     email,
+    onClearFields,
     handleSetEmail,
     handleSetIsRegister,
     handleSetUsername,

@@ -10,8 +10,9 @@ export default function Home() {
     isRegister,
     username,
     password,
-    handleSetEmail,
     email,
+    handleSetEmail,
+    onClearFields,
     handleSetIsRegister,
     handleSubmit,
     handleSetPassword,
@@ -31,7 +32,9 @@ export default function Home() {
           onSetPassword={handleSetPassword}
           onSetEmail={handleSetEmail}
           onSubmit={handleSubmit}
-          onSetRegister={() => handleSetIsRegister(false)}
+          onSetRegister={() => {
+            handleSetIsRegister(false), onClearFields();
+          }}
         />
       ) : (
         <Login

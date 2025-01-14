@@ -78,7 +78,7 @@ export function AuthForm({
           </div>
         )}
 
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="text-red-700">{error}</div>}
 
         <Button type="submit" disabled={loading}>
           {loading ? <Loading /> : submitButtonText}

@@ -37,7 +37,12 @@ export async function POST(req: Request) {
     }
 
     return new Response(
-      JSON.stringify({ id: user.id, name: user.username, email: user.email }),
+      JSON.stringify({
+        id: user.id,
+        name: user.username,
+        email: user.email,
+        balance: user.balance,
+      }),
       {
         status: 200,
       }
