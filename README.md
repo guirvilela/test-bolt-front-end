@@ -214,7 +214,7 @@ Verificar os containers: Após a execução, você pode verificar os containers 
 ---
 
 
-Quanto as instruções de como rodar o projeto, fiz um tópico exclusivo na sessão <a href="#package-como-baixar-e-executar-o-projeto">Baixar e Executar</a>. 
+Quanto as instruções de como rodar o projeto, cheque o tópico exclusivo na sessão <a href="#package-como-baixar-e-executar-o-projeto">Baixar e Executar</a>. 
 
 
 ---
