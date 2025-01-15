@@ -3,7 +3,6 @@ import { useAuthContext } from "@/context/authContext";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-// Mocking external dependencies
 jest.mock("@/context/authContext");
 jest.mock("@/components/ui/loading", () => ({
   Loading: jest.fn(() => <div>Loading...</div>),
@@ -35,7 +34,6 @@ const operationHistory = [
   },
 ];
 
-// Tipando o uso do mock
 const mockUseAuthContext = useAuthContext as jest.Mock;
 
 describe("CardOperations", () => {

@@ -2,7 +2,6 @@ import { CardTransaction } from "@/components/dashboard/card-transactions";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-// Mock functions
 const mockOnActiveOperation = jest.fn();
 const mockOnSetAmount = jest.fn();
 const mockOnSetRecipientId = jest.fn();
@@ -123,7 +122,6 @@ describe("CardTransaction", () => {
       />
     );
 
-    // Verificar se o input de valor da operação chama onSetAmount
     const inputValue = screen.getByTestId("test-card-transaction-value");
     fireEvent.change(inputValue, { target: { value: "200" } });
 
@@ -144,7 +142,6 @@ describe("CardTransaction", () => {
       />
     );
 
-    // Verificar se o input de ID do destinatário chama onSetRecipientId
     const inputRecipientId = screen.getByTestId("test-card-transaction-id");
     fireEvent.change(inputRecipientId, { target: { value: "456" } });
 
