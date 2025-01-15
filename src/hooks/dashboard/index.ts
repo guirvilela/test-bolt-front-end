@@ -148,7 +148,7 @@ export function useDashboardController() {
     } finally {
       getUserOperations();
     }
-  }, [amount, operationHistory]);
+  }, [amount, operationHistory, activeOperation]);
 
   const handleTransfer = React.useCallback(async () => {
     const transferAmount = parseFloat(amount);
@@ -207,7 +207,7 @@ export function useDashboardController() {
     } finally {
       getUserOperations();
     }
-  }, [balance, amount, recipientId, user, operationHistory]);
+  }, [activeOperation, balance, amount, recipientId, user, operationHistory]);
 
   const handleRevert = React.useCallback(
     async (operation: OperationHistory) => {

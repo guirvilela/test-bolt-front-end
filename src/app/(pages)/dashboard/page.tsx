@@ -49,7 +49,7 @@ export default function Dashboard() {
 
         <header className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-900">
-            Dashboard Financeira de {user?.username}
+            Dashboard Financeira de {user?.username} - ID: {user?.id}
           </h1>
 
           <Wallet value={balance} />
