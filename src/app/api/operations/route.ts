@@ -40,10 +40,11 @@ export async function GET(req: Request) {
             senderRows.length > 0 ? senderRows[0].username : "Desconhecido";
         }
 
-        if (operation.recipient_id) {
+        if (operation.recipientId) {
+          // Corrigido para recipientId
           const [recipientRows]: any = await pool.execute(
             "SELECT username FROM users WHERE id = ?",
-            [operation.recipient_id]
+            [operation.recipientId] // Corrigido para recipientId
           );
           recipientName =
             recipientRows.length > 0
@@ -63,7 +64,6 @@ export async function GET(req: Request) {
       status: 200,
     });
   } catch (error) {
-    console.error("Erro ao buscar operações:", error);
     return new Response(
       JSON.stringify({ message: "Erro ao encontrar operações" }),
       { status: 500 }

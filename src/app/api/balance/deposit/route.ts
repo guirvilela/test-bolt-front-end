@@ -37,8 +37,8 @@ export async function POST(req: Request) {
 
     // Inserindo operação de depósito
     const [operationRows]: any = await pool.execute(
-      "INSERT INTO operations (userId, type, amount, balanceAfter) VALUES (?, ?, ?, ?)",
-      [user.id, "deposit", deposit, newBalance]
+      "INSERT INTO operations (userId, type, amount, balanceAfter, recipientName) VALUES (?, ?, ?, ?,?)",
+      [user.id, "deposit", deposit, newBalance, user.username]
     );
 
     const operationId = (operationRows as any).insertId;
@@ -54,8 +54,6 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Erro ao processar o depósito:", error);
-
     return new Response(
       JSON.stringify({
         message: "Erro ao processar o depósito",

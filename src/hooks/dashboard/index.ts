@@ -51,7 +51,6 @@ export function useDashboardController() {
 
   const getUserData = React.useCallback(async () => {
     if (!user?.id) {
-      console.error("ID do usuário não está disponível");
       return;
     }
 
@@ -73,15 +72,12 @@ export function useDashboardController() {
       const { balance } = data;
 
       setBalance(balance);
-    } catch (error) {
-      console.error("Erro ao buscar dados do usuário:", error);
-    }
+    } catch (error) {}
   }, [user, setBalance]);
 
   const getUserOperations = React.useCallback(async () => {
     setLoading(true);
     if (!user?.id) {
-      console.error("ID do usuário não está disponível");
       return;
     }
 
@@ -96,7 +92,6 @@ export function useDashboardController() {
       const data = await response.json();
       setOperationHistory(data.operations || []);
     } catch (error) {
-      console.error("Erro ao buscar operações do usuário:", error);
     } finally {
       setLoading(false);
     }
@@ -142,24 +137,16 @@ export function useDashboardController() {
         const { balance, id, userId } = data;
 
         setBalance(balance);
-        const operation: DepositResponse = {
-          id,
-          userId,
-          type: "deposit",
-          amount: depositAmount,
-          timestamp: new Date().toISOString(),
-          balance,
-        };
 
-        setOperationHistory([operation, ...operationHistory]);
         handleSetAmount("");
         setErrors([]);
       } else {
         setErrors([data.message || "Erro ao processar o depósito"]);
       }
     } catch (error) {
-      console.error("Erro ao chamar a API de depósito", error);
       setErrors(["Erro ao processar o depósito"]);
+    } finally {
+      getUserOperations();
     }
   }, [amount, operationHistory]);
 
@@ -210,39 +197,32 @@ export function useDashboardController() {
 
       const newBalance = data.senderBalance;
 
-      const operation: TransferResponse = {
-        type: "transfer",
-        amount: transferAmount,
-        senderId: user?.id,
-        recipientId: recipientId,
-        senderName: user?.username,
-        recipientName: data.receiverName,
-        timestamp: new Date().toISOString(),
-        balance: newBalance,
-      };
-
       setBalance(newBalance);
-      setOperationHistory([operation, ...operationHistory]);
 
       setAmount("");
       setRecipientId("");
       setErrors([]);
     } catch (error) {
-      console.error("Erro ao processar a transferência:", error);
       setErrors(["Erro ao se conectar com o servidor"]);
+    } finally {
+      getUserOperations();
     }
   }, [balance, amount, recipientId, user, operationHistory]);
 
   const handleRevert = React.useCallback(
     async (operation: OperationHistory) => {
-      console.log("OPERATAIO", operation);
-
       const amount = Number(operation.amount);
       let newBalance = Number(balance);
 
       let balanceAfterRevert = 0;
+
       if (operation.type === "deposit") {
         newBalance -= amount;
+        balanceAfterRevert = newBalance;
+      } else if (operation.type === "transfer") {
+        if (operation.senderId === operation.userId) {
+          newBalance -= amount;
+        }
         balanceAfterRevert = newBalance;
       }
 
@@ -251,17 +231,6 @@ export function useDashboardController() {
         return;
       }
 
-      const revertOperation: RevertResponse = {
-        id: operation.id,
-        userId: operation.userId,
-        type: `revert_${operation.type}`,
-        amount: amount,
-        timestamp: new Date().toISOString(),
-        balance: newBalance,
-        revertId: operation.id,
-      };
-
-      setBalance(newBalance);
       setOperationHistory(operationHistory);
 
       try {
@@ -274,31 +243,28 @@ export function useDashboardController() {
             id: operation.id,
             userId: operation.userId,
             amount: amount,
-            type: revertOperation.type,
+            type: `revert_${operation.type}`,
             balanceAfterRevert: balanceAfterRevert,
+            senderId: operation.senderId,
+            recipientId: operation.recipientId,
+            recipientName: operation.recipientName,
           }),
         });
 
         if (response.ok) {
           const responseData = await response.json();
-          const { id, userId, balance, revertId } = responseData;
+          const { balance } = responseData;
 
-          const newRevertOperation = {
-            ...revertOperation,
-            id,
-            revertId,
-            balance,
-          };
-
+          setBalance(balance);
           setErrors([]);
-          setOperationHistory([newRevertOperation, ...operationHistory]);
         } else {
           const errorData = await response.json();
           setErrors([errorData.message || "Erro ao reverter a operação"]);
         }
       } catch (error) {
-        console.error("Erro ao chamar a API:", error);
         setErrors(["Erro ao se comunicar com o servidor"]);
+      } finally {
+        getUserOperations();
       }
     },
     [balance, operationHistory]

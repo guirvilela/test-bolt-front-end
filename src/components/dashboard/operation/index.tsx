@@ -1,5 +1,6 @@
 import { OperationHistory } from "@/hooks/dashboard";
 import { formatCurrency } from "@/lib/currency";
+import { parseIso } from "@/lib/date";
 
 interface OperationProps {
   operation: OperationHistory;
@@ -28,10 +29,10 @@ export function Operation({ operation }: OperationProps) {
       >
         {operation.type === "deposit" || operation.type === "received"
           ? `+${formatCurrency(operation.amount)}`
-          : `-${formatCurrency(operation.amount)}`}
+          : `${formatCurrency(operation.amount)}`}
       </p>
       <p className="text-sm text-gray-400 mt-1">
-        {new Date(operation.timestamp).toLocaleString()}
+        {parseIso(String(operation.timestamp))}
       </p>
     </div>
   );

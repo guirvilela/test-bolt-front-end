@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
+import { useAuthContext } from "@/context/authContext";
 import { OperationHistory } from "@/hooks/dashboard";
 import { RotateCcw } from "lucide-react";
 import { Operation } from "../operation";
@@ -21,7 +22,7 @@ export function CardOperations({
       .map((operation) => operation.revertId)
   );
 
-  console.log(revertedIds);
+  const { user } = useAuthContext();
 
   return (
     <div className="rounded-xl bg-white shadow-sm">
@@ -43,7 +44,7 @@ export function CardOperations({
           </div>
         ) : (
           <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
-            {operationHistory.map((operation) => (
+            {operationHistory.map((operation, index) => (
               <div
                 key={operation.id || `${operation.timestamp}-${operation.type}`}
                 className="p-4 rounded-xl border border-gray-100 hover:border-background-primary/30 transition-all duration-200 bg-white shadow-sm"
@@ -51,8 +52,12 @@ export function CardOperations({
                 <div className="flex justify-between items-start">
                   <Operation operation={operation} />
 
-                  {!operation.type.startsWith("revert") &&
-                    !revertedIds.has(operation.id) && (
+                  {index === 0 &&
+                    !operation.type.startsWith("revert") &&
+                    !revertedIds.has(operation.id) &&
+                    (operation.type === "deposit" ||
+                      (operation.type === "transfer" &&
+                        operation.recipientName !== user?.username)) && (
                       <Button
                         fullWidth={false}
                         onClick={() => onRevertOperation(operation)}

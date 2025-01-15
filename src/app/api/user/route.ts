@@ -25,7 +25,6 @@ export async function GET(req: Request) {
     }
     return new Response(JSON.stringify(rows[0]), { status: 200 });
   } catch (error) {
-    console.error("Erro ao buscar usuário:", error);
     return new Response(
       JSON.stringify({ message: "Erro ao encontrar usuário" }),
       { status: 500 }

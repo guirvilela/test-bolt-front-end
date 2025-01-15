@@ -51,7 +51,7 @@ export function AuthForm({
         <div className="input-group">
           <Input
             type="text"
-            placeholder="Username"
+            placeholder="Usuário"
             value={username}
             onChange={(e) => onSetUsername(e.target.value)}
             required
@@ -60,7 +60,7 @@ export function AuthForm({
         <div className="input-group">
           <Input
             type="password"
-            placeholder="Password"
+            placeholder="Senha"
             value={password}
             onChange={(e) => onSetPassword(e.target.value)}
             required
@@ -70,7 +70,7 @@ export function AuthForm({
           <div className="input-group">
             <Input
               type="email"
-              placeholder="Email"
+              placeholder="E-mail"
               value={email || ""}
               onChange={(e) => onSetEmail(e.target.value)}
               required

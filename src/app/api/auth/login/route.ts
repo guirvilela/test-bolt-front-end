@@ -48,7 +48,6 @@ export async function POST(req: Request) {
       }
     );
   } catch (error) {
-    console.error(error);
     return new Response(JSON.stringify({ message: "Erro ao fazer login" }), {
       status: 500,
     });
