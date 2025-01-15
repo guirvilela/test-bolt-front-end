@@ -24,7 +24,7 @@ export function useDashboardController() {
   const [errors, setErrors] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
 
-  const { user, clearUser } = useAuthContext();
+  const { user, setUser, clearUser } = useAuthContext();
   const router = useRouter();
 
   const transactionValidation = z.object({
@@ -270,11 +270,6 @@ export function useDashboardController() {
     [balance, operationHistory]
   );
 
-  const logout = React.useCallback(() => {
-    clearUser();
-    router.push("/");
-  }, [user, router]);
-
   const handleSetAmount = React.useCallback(
     (amount: string) => {
       setAmount(amount);
@@ -297,6 +292,14 @@ export function useDashboardController() {
     [activeOperation, recipientId]
   );
 
+  const logout = React.useCallback(() => {
+    localStorage.removeItem("bolt-user");
+
+    clearUser();
+
+    router.push("/login");
+  }, [user, router, localStorage]);
+
   React.useEffect(() => {
     if (user && user.id) {
       getUserData();
@@ -306,10 +309,16 @@ export function useDashboardController() {
   }, [user]);
 
   React.useEffect(() => {
+    const storedUser = localStorage.getItem("bolt-user");
+
     if (!user || !user.id) {
-      router.push("/");
+      if (!storedUser) {
+        router.push("/");
+      } else {
+        setUser(JSON.parse(storedUser));
+      }
     }
-  }, [user, router]);
+  }, [user, router, setUser]);
 
   return {
     balance,

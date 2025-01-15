@@ -41,11 +41,13 @@ export function useHomeController() {
       const data: User = await res.json();
 
       if (res.ok) {
+        localStorage.setItem("bolt-user", JSON.stringify(data));
+
         setUser(data);
 
         router.push("/dashboard");
       } else {
-        setError("Usuário ou senha invalido");
+        setError("Usuário ou senha inválido");
       }
     } catch (err) {
       setError("Erro ao se conectar com o servidor");
