@@ -31,13 +31,13 @@ Nele, foi desenvolvido uma aplicação web utilizando a lógica de programação
 requisições à API da aplicação, que para isso foi utilizado o Server Actions para buscar todos as operações feitas pelo usuário.
 
 
-Além disso,para a construção dessa aplicação foi utilizado os seguintes tecnologias:
+Além disso, para a construção dessa aplicação foi utilizado os seguintes tecnologias:
 
 - HTML;
-- React
-- Next.js
-- TawildCss;
-- Javascript
+- React;
+- Next.js;
+- TailwildCss;
+- Javascript;
 - Typescript;
 - Componentes reutilizáveis;
 - React Hooks;
@@ -45,9 +45,9 @@ Além disso,para a construção dessa aplicação foi utilizado os seguintes tec
 - NPM;
 - Jest;
 - Storybook;
-- HeroIcons
-- Docker
-- MySql
+- HeroIcons;
+- Docker;
+- MySql.
 
 ---
 
@@ -72,19 +72,20 @@ Além disso,para a construção dessa aplicação foi utilizado os seguintes tec
 
 ## :interrobang: Objetivo
 
-Esse teste tem como objetivo, desenvolver as funcionalidades de Depósito e transferência de saldo,
-além disso aplicar testes unitários, componentes organizados, HTML semântico e recursos do próprio Next.js para roteamento.
+Esse teste tem como objetivo, desenvolver as funcionalidades de depósito e transferência de saldo,
+além de aplicar testes unitários, disponibilizar componentes organizados, HTML semântico e recursos do próprio Next.js para roteamento.
 
 
 Assim, nesse projeto é possível:
-1. Registrar uma conta utilizando Nome de Usuário, Senha e email.
+1. Registrar uma conta utilizando nome de usuário, senha e email.
 2. Fazer login através do usuário e senha cadastrados.
-3. Fazer o depósito para própria conta
-4. Visualizar o saldo alterando a cada operação
-5. Fazer uma transferência para uma usuário existente através do ID
-6. Validar se realmente tem saldo para fazer a transferência
-7. Reverter Depósito e Transferência
-8. O Usuário que recebeu a transferência, visualizar o saldo atualizado ou reversão de operação
+3. Fazer o depósito para própria conta.
+4. Visualizar o saldo sendo atualizado a cada operação.
+5. Fazer uma transferência para uma usuário existente através do ID.
+6. Validar se há saldo suficiente para fazer a transferência.
+7. Reverter operações de depósito e transferência.
+8. Se usuário que recebeu a transferência, visualizar o saldo atualizado.
+9. Se usuário que enviou a transferência, visualizar o saldo atualizado ou reversão de operação.
 
 
 ---
@@ -102,7 +103,7 @@ Para este teste foi utilizado a documentação pelo Storybook para facilitar a v
 
 ## :hammer: Testes
 
-Para a confiabilidade das funcionalidades, foi desenvolvido testes unitarios em cada componente e página da aplicação, para isso foi utilizado o Jest como principal ferramenta de teste. A aplicação foi importante para verificar e prevenir futuros bugs no sistema.
+Para a confiabilidade das funcionalidades, foram desenvolvidos testes unitários em cada componente. Para isso, foi utilizado o Jest como principal ferramenta de teste. A aplicação foi importante para verificar e prevenir futuros bugs no sistema.
 
  <div align="center" >
   <img src="https://i.imgur.com/KgkZjhN.png" width="560">
@@ -181,7 +182,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
       npm run test
   ```
 
-- Configuração Do MySql
+- Configuração Do MySql:
   Para configurar o banco de dados MySQL, execute os seguintes comandos para criar as tabelas necessárias:
 
  ```bash
@@ -207,7 +208,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
   );
   ```
 
-- Docker
+- Docker:
 Iniciar o container do Docker: Use o docker-compose up para iniciar o front-end e o back-end no Docker. Certifique-se de ter um docker-compose.yml configurado adequadamente com a integração entre os serviços.
 Verificar os containers: Após a execução, você pode verificar os containers com docker ps para garantir que tudo está funcionando corretamente.
 ---
