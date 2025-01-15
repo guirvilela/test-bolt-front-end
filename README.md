@@ -54,7 +54,7 @@ Além disso, para a construção dessa aplicação foi utilizado os seguintes te
 - **Página de Login**:
 
 <div align="center" >
-   <img src="https://imgur.com/cWvqILN.png" width="420">______
+   <img src="https://imgur.com/cWvqILN.png" width="420">
    <img src="https://imgur.com/vpVrnQM.png" width=420>
    
 </div>
