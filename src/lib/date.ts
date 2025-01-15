@@ -1,6 +1,6 @@
 export function parseIso(date: string) {
   return new Date(date).toLocaleString("pt-BR", {
-    timeZone: "America/Sao_Paulo", // Ajuste para o seu fuso horário
+    timeZone: "America/Sao_Paulo",
     hour12: false,
     year: "numeric",
     month: "2-digit",

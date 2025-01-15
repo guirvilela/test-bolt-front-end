@@ -6,7 +6,7 @@ import { Wallet } from "@/components/dashboard/wallet";
 import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/context/authContext";
 import { useDashboardController } from "@/hooks/dashboard";
-import { ArrowRightLeft, BadgePlus } from "lucide-react";
+import { ArrowsRightLeftIcon, PlusIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 
 export default function Dashboard() {
@@ -54,9 +54,9 @@ export default function Dashboard() {
           <h3 className=" text-xl font-semibold leading-none tracking-tight  flex items-center gap-2 text-gray-800">
             <div className="text-background-primary">
               {activeOperation === "deposit" ? (
-                <BadgePlus />
+                <PlusIcon className="size-6" />
               ) : (
-                <ArrowRightLeft />
+                <ArrowsRightLeftIcon className="size-6" />
               )}
             </div>
             {activeOperation === "deposit"

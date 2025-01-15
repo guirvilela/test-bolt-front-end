@@ -23,15 +23,13 @@ export async function POST(req: Request) {
         });
       }
 
-      // Reverter depósito (subtrair do saldo)
       await pool.execute(
         "UPDATE users SET balance = balance - ? WHERE id = ?",
-        [parsedAmount, userId] // Diminuir o saldo do usuário
+        [parsedAmount, userId]
       );
 
-      // Registra a operação de reversão
       const [insertResult] = await pool.execute(
-        "INSERT INTO operations (userId, type, amount, balanceAfter, revertId, recipientName) VALUES (?, ?, ?, ?, ?, ?)", // Adiciona recipientName
+        "INSERT INTO operations (userId, type, amount, balanceAfter, revertId, recipientName) VALUES (?, ?, ?, ?, ?, ?)",
         [
           userId,
           "revert",
@@ -54,48 +52,43 @@ export async function POST(req: Request) {
         { status: 200 }
       );
     } else if (type === "revert_transfer") {
-      // Reverter transferência: Ajusta saldo do remetente e destinatário
       if (senderId === userId) {
-        // O saldo do remetente deve ser aumentado
         await pool.execute(
           "UPDATE users SET balance = balance + ? WHERE id = ?",
-          [Math.abs(parsedAmount), senderId] // Restitui o valor ao remetente
+          [Math.abs(parsedAmount), senderId]
         );
       }
 
       if (recipientId !== userId) {
-        // O saldo do destinatário deve ser diminuído
         await pool.execute(
           "UPDATE users SET balance = balance - ? WHERE id = ?",
-          [Math.abs(parsedAmount), recipientId] // Deduz o valor do destinatário
+          [Math.abs(parsedAmount), recipientId]
         );
       }
 
-      // Registra a operação de reversão da transferência para o remetente
       const [insertResultSender] = await pool.execute(
-        "INSERT INTO operations (userId, type, amount, balanceAfter, revertId, recipientName) VALUES (?, ?, ?, ?, ?, ?)", // Adiciona recipientName
+        "INSERT INTO operations (userId, type, amount, balanceAfter, revertId, recipientName) VALUES (?, ?, ?, ?, ?, ?)",
         [
           userId,
           "revert_transfer",
           Math.abs(parsedAmount),
           parsedBalanceAfterRevert,
           id,
-          recipientName, // Salva o nome do destinatário
+          recipientName,
         ]
       );
 
       const operationIdSender = (insertResultSender as any).insertId;
 
-      // Registra a operação de reversão da transferência para o destinatário
       const [insertResultRecipient] = await pool.execute(
-        "INSERT INTO operations (userId, type, amount, balanceAfter, revertId, recipientName) VALUES (?, ?, ?, ?, ?, ?)", // Adiciona recipientName
+        "INSERT INTO operations (userId, type, amount, balanceAfter, revertId, recipientName) VALUES (?, ?, ?, ?, ?, ?)",
         [
           recipientId,
-          "revert_transfer", // Mesmo tipo de operação para o destinatário
+          "revert_transfer",
           Math.abs(parsedAmount),
           parsedBalanceAfterRevert,
           id,
-          senderId, // O nome do remetente é salvo para o destinatário
+          senderId,
         ]
       );
 

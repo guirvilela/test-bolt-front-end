@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
 import { useAuthContext } from "@/context/authContext";
 import { OperationHistory } from "@/hooks/dashboard";
-import { RotateCcw } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/16/solid";
 import { Operation } from "../operation";
 
 interface CardOperationsProps {
@@ -29,7 +29,7 @@ export function CardOperations({
       <header className="p-6 pb-2">
         <h3 className="text-xl font-semibold leading-none tracking-tight flex items-center gap-2 text-gray-800">
           <div className="text-background-primary">
-            <RotateCcw />
+            <ArrowPathIcon className="size-5" />
           </div>
           Histórico de Operações
         </h3>
@@ -49,7 +49,7 @@ export function CardOperations({
                 key={operation.id || `${operation.timestamp}-${operation.type}`}
                 className="p-4 rounded-xl border border-gray-100 hover:border-background-primary/30 transition-all duration-200 bg-white shadow-sm"
               >
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-center">
                   <Operation operation={operation} />
 
                   {index === 0 &&
@@ -63,7 +63,7 @@ export function CardOperations({
                         onClick={() => onRevertOperation(operation)}
                         className="hover:text-background-primary"
                       >
-                        <RotateCcw />
+                        <ArrowPathIcon className="size-6" />
                       </Button>
                     )}
                 </div>

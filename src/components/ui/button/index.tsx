@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
 import { ButtonHTMLAttributes } from "react";
+import { Loading } from "../loading";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
@@ -14,7 +14,7 @@ export function Button({
   fullWidth = true,
   className,
   children,
-  loading = false,
+  loading,
   ...props
 }: ButtonProps) {
   const baseStyles =
@@ -36,8 +36,11 @@ export function Button({
       {...props}
     >
       {loading ? (
-        <div className="flex items-center justify-center">
-          <Loader2 className="h-5 w-5 animate-spin mr-2" />
+        <div
+          className="flex items-center justify-center"
+          data-testid="test-button-loading"
+        >
+          <Loading />
         </div>
       ) : (
         children

@@ -41,10 +41,9 @@ export async function GET(req: Request) {
         }
 
         if (operation.recipientId) {
-          // Corrigido para recipientId
           const [recipientRows]: any = await pool.execute(
             "SELECT username FROM users WHERE id = ?",
-            [operation.recipientId] // Corrigido para recipientId
+            [operation.recipientId]
           );
           recipientName =
             recipientRows.length > 0

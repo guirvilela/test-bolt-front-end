@@ -55,6 +55,7 @@ export function AuthForm({
             value={username}
             onChange={(e) => onSetUsername(e.target.value)}
             required
+            data-testid="test-user-input"
           />
         </div>
         <div className="input-group">
@@ -64,6 +65,7 @@ export function AuthForm({
             value={password}
             onChange={(e) => onSetPassword(e.target.value)}
             required
+            data-testid="test-user-password"
           />
         </div>
         {showEmail && onSetEmail && (
@@ -74,13 +76,18 @@ export function AuthForm({
               value={email || ""}
               onChange={(e) => onSetEmail(e.target.value)}
               required
+              data-testid="test-user-email"
             />
           </div>
         )}
 
         {error && <div className="text-red-700">{error}</div>}
 
-        <Button type="submit" disabled={loading}>
+        <Button
+          type="submit"
+          disabled={loading}
+          data-testid="test-auth-btn-login"
+        >
           {loading ? <Loading /> : submitButtonText}
         </Button>
       </form>

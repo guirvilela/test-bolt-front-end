@@ -35,7 +35,6 @@ export async function POST(req: Request) {
       user.id,
     ]);
 
-    // Inserindo operação de depósito
     const [operationRows]: any = await pool.execute(
       "INSERT INTO operations (userId, type, amount, balanceAfter, recipientName) VALUES (?, ?, ?, ?,?)",
       [user.id, "deposit", deposit, newBalance, user.username]

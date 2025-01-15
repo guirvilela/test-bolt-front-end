@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { ArrowRightLeft, Plus } from "lucide-react";
+import { ArrowsRightLeftIcon, PlusIcon } from "@heroicons/react/16/solid";
+
 import React from "react";
 
 interface CardTransactionProps {
@@ -47,6 +48,7 @@ export function CardTransaction({
         placeholder="R$ 0,00"
         value={amount}
         onChange={(e) => onSetAmount(e.target.value)}
+        data-testid="test-card-transaction-value"
       />
 
       {activeOperation === "transfer" && (
@@ -55,6 +57,7 @@ export function CardTransaction({
           placeholder="Digite o ID do destinatário"
           value={recipientId}
           onChange={(e) => onSetRecipientId(e.target.value)}
+          data-testid="test-card-transaction-id"
         />
       )}
 
@@ -64,7 +67,11 @@ export function CardTransaction({
         variant="primary"
       >
         <div className="w-4 ">
-          {activeOperation === "deposit" ? <Plus /> : <ArrowRightLeft />}
+          {activeOperation === "deposit" ? (
+            <PlusIcon className="size-6" />
+          ) : (
+            <ArrowsRightLeftIcon className="size-6" />
+          )}
         </div>
         {activeOperation === "deposit" ? "Depositar" : "Transferir"}
       </Button>

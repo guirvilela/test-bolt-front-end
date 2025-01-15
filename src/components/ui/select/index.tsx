@@ -14,7 +14,7 @@ interface SelectProps
 
 export function Select({ value, options, onChange, ...rest }: SelectProps) {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value); // Extrai o valor e chama o onChange fornecido
+    onChange(e.target.value);
   };
 
   return (

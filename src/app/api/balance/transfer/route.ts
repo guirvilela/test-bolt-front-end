@@ -3,7 +3,6 @@ import { pool } from "@/lib/db";
 export async function POST(req: Request) {
   const { transferAmount, senderId, receiverId } = await req.json();
 
-  // Validação do valor da transferência
   if (
     !transferAmount ||
     isNaN(Number(transferAmount)) ||
@@ -15,7 +14,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // Impede transferências para si mesmo
   if (Number(senderId) === Number(receiverId)) {
     return new Response(
       JSON.stringify({ message: "Você não pode transferir para si mesmo" }),
@@ -24,7 +22,6 @@ export async function POST(req: Request) {
   }
 
   try {
-    // Verifica se o remetente existe
     const [senderRows] = await pool.execute(
       "SELECT * FROM users WHERE id = ?",
       [senderId]
@@ -40,7 +37,6 @@ export async function POST(req: Request) {
     const sender = (senderRows as any[])[0];
     const transfer = Number(transferAmount);
 
-    // Verifica saldo do remetente
     if (Number(sender.balance) < transfer) {
       return new Response(
         JSON.stringify({ message: "Saldo insuficiente para transferência" }),
@@ -48,7 +44,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Verifica se o receptor existe
     const [receiverRows] = await pool.execute(
       "SELECT * FROM users WHERE id = ?",
       [receiverId]
@@ -65,21 +60,18 @@ export async function POST(req: Request) {
 
     const receiver = (receiverRows as any[])[0];
 
-    // Atualiza o saldo do remetente
     const newSenderBalance = Number(sender.balance) - transfer;
     await pool.execute("UPDATE users SET balance = ? WHERE id = ?", [
       newSenderBalance,
       sender.id,
     ]);
 
-    // Atualiza o saldo do receptor
     const newReceiverBalance = Number(receiver.balance) + transfer;
     await pool.execute("UPDATE users SET balance = ? WHERE id = ?", [
       newReceiverBalance,
       receiver.id,
     ]);
 
-    // Registra a operação de transferência do remetente
     await pool.execute(
       "INSERT INTO operations (userId, type, amount, balanceAfter, senderId, recipientId, recipientName) VALUES (?, ?, ?, ?, ?, ?, ?)",
       [
@@ -89,11 +81,10 @@ export async function POST(req: Request) {
         newSenderBalance,
         sender.id,
         receiver.id,
-        receiver.username, // Adiciona recipientName
+        receiver.username,
       ]
     );
 
-    // Registra a operação de recebimento para o receptor, incluindo o senderId e recipientName
     await pool.execute(
       "INSERT INTO operations (userId, type, amount, balanceAfter, senderId, recipientId, recipientName) VALUES (?, ?, ?, ?, ?, ?, ?)",
       [
@@ -103,7 +94,7 @@ export async function POST(req: Request) {
         newReceiverBalance,
         sender.id,
         receiver.id,
-        receiver.username, // Adiciona recipientName
+        receiver.username,
       ]
     );
 
