@@ -1,0 +1,149 @@
+import { Meta } from "@storybook/blocks";
+import Image from "next/image";
+
+export const RightArrow = () => (
+  <svg 
+    viewBox="0 0 14 14" 
+    width="8px" 
+    height="14px" 
+    style={{ 
+      marginLeft: '4px',
+      display: 'inline-block',
+      shapeRendering: 'inherit',
+      verticalAlign: 'middle',
+      fill: 'currentColor',
+      'path fill': 'currentColor'
+    }}
+  >
+    <path d="m11.1 7.35-5.5 5.5a.5.5 0 0 1-.7-.7L10.04 7 4.9 1.85a.5.5 0 1 1 .7-.7l5.5 5.5c.2.2.2.5 0 .7Z" />
+  </svg>
+);
+
+<Meta title="Introdução do projeto" />
+
+<div className="sb-container">
+  <div className="sb-section-title">
+    # Introdução ao Desafio
+  </div>
+
+  <div className="sb-section-description">
+   ## Teste Bolt
+    <p>
+      Ao acessar o site, você pode realizar o <strong>login</strong> utilizando seu usuário e senha ou fazer um novo <strong>registro</strong> caso ainda não tenha uma conta.
+    </p>
+    <p>
+      Após o login, você terá acesso a funcionalidades requeridas no Desafio, são elas:
+    </p>
+    <ul>
+      <li><strong>Depósitos</strong>: Os usuários podem realizar depósitos em suas contas. O sistema automaticamente atualiza o saldo disponível após a transação.</li>
+      <li><strong>Histórico de Operações</strong>: A plataforma mantém um registro completo das transações realizadas, incluindo depósitos e transferências, permitindo aos usuários consultar suas movimentações passadas.</li>
+      <li><strong>Reverter Depósito</strong>: Caso o usuário cometa um erro ao realizar um depósito, ele tem a opção de reverter a operação, garantindo flexibilidade para correções. <strong>Mas apenas a operação mais recente</strong></li>
+      <li><strong>Transferências</strong>: Os usuários podem transferir valores para outros usuários, com validação automática do saldo disponível para garantir que o envio não exceda o valor disponível. Através do ID do usuário</li>
+      <li><strong>Cancelar Transferência</strong>: Apenas o usuário que iniciou a transferência tem permissão para cancelá-la, o que proporciona controle sobre suas transações.</li>
+    </ul>
+
+   <p>
+   A plataforma foi construída utilizando as seguintes tecnologias:
+</p>
+<ul>
+  <li><strong>React</strong> para a construção da interface do usuário;</li>
+  <li><strong>Next.js</strong> como framework de renderização do lado do servidor;</li>
+  <li><strong>Tailwind CSS</strong> para estilização </li>
+  <li><strong>Hooks</strong> e <strong>componentização</strong> para reutilização de código e organização;</li>
+  <li><strong>Server Actions</strong> para otimizar a comunicação entre o frontend e o backend;</li>
+  <li><strong>Testes unitários</strong> para garantir a qualidade e estabilidade do sistema.</li>
+</ul>
+
+  </div>
+
+  <h3>Como iniciar o projeto</h3>
+<ol>
+  <li><strong>Instalar dependências:</strong> Execute o comando <code>npm install</code> para instalar todas as dependências do projeto.</li>
+  <li><strong>Iniciar o servidor de desenvolvimento:</strong> Execute <code>npm run dev</code> para iniciar o servidor de desenvolvimento em <strong>http://localhost:3000</strong>.</li>
+</ol>
+
+<h3>Como executar os testes</h3>
+<ol>
+  <li><strong>Testes unitários:</strong> Para executar os testes unitários, use o comando <code>npm test</code>. Isso irá rodar os testes configurados com Jest.</li>
+</ol>
+
+<h3>Como executar o Storybook</h3>
+<ol>
+  <li><strong>Iniciar o Storybook:</strong> Para visualizar os componentes em desenvolvimento, execute <code>npm run storybook</code>. O Storybook será iniciado em <strong>http://localhost:6006</strong>.</li>
+</ol>
+
+<h3>Criar as tabelas no MySQL</h3>
+<p>Para configurar o banco de dados MySQL, execute os seguintes comandos para criar as tabelas necessárias:</p>
+<pre>
+  CREATE TABLE `operations` (
+      `id` INT AUTO_INCREMENT PRIMARY KEY,
+      `userId` INT,
+      `type` VARCHAR(255) NOT NULL,
+      `amount` DECIMAL(10,2) NOT NULL,
+      `senderId` INT,
+      `timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP,
+      `balanceAfter` DECIMAL(10,2),
+      `recipientId` INT,
+      `revertId` INT,
+      `recipientName` VARCHAR(255)
+  );
+
+  CREATE TABLE `users` (
+      `id` INT AUTO_INCREMENT PRIMARY KEY,
+      `username` VARCHAR(255) NOT NULL,
+      `password` VARCHAR(255) NOT NULL,
+      `email` VARCHAR(255) NOT NULL UNIQUE,
+      `balance` DECIMAL(10,2) DEFAULT 0.00
+  );
+</pre>
+
+<h3>Configuração do .env</h3>
+<p>Não se esqueça de criar um arquivo <strong>.env</strong> na raiz do projeto com as seguintes variáveis de ambiente para configurar o MySQL:</p>
+<pre>
+  MYSQL_ROOT_PASSWORD=rootpassword
+  MYSQL_DATABASE=authdb
+  MYSQL_USER=user
+  MYSQL_PASSWORD=userpassword
+</pre>
+
+<h3>Como usar o Docker para integrar o front-end e back-end</h3>
+<ol>
+  <li><strong>Iniciar o container do Docker:</strong> Use o <code>docker-compose up</code> para iniciar o front-end e o back-end no Docker. Certifique-se de ter um <code>docker-compose.yml</code> configurado adequadamente com a integração entre os serviços.</li>
+  <li><strong>Verificar os containers:</strong> Após a execução, você pode verificar os containers com <code>docker ps</code> para garantir que tudo está funcionando corretamente.</li>
+</ol>
+
+
+
+</div>
+
+<style>
+  {`
+  .sb-container {
+    margin-bottom: 48px;
+  }
+  .sb-section-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  .sb-section-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #34495e;
+  }
+  .sb-section-description p {
+    margin-bottom: 15px;
+  }
+  .sb-section-description ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .sb-section-description li {
+    margin-bottom: 10px;
+  }
+  .sb-section-description strong {
+    color: #2980b9;
+  }
+  `}
+</style>
