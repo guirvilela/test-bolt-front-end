@@ -1,4 +1,4 @@
-# Bolt | Desafio - React
+# Bolt | Desafio - Next.Js
 
 O projeto **Bolt** é uma aplicação web com o propósito de executar depósitos e transferências.
 
@@ -10,7 +10,6 @@ O projeto **Bolt** é uma aplicação web com o propósito de executar depósito
   <a href="#interrobang-objetivo">Objetivo</a>&nbsp;|&nbsp;
   <a href="#book-documentação">Documentação</a>&nbsp;|&nbsp;
   <a href="#hammer-testes">Testes</a>&nbsp;|&nbsp;
-  <a href="#clock1-scrum">Scrum</a>&nbsp;|&nbsp;
   <a href="#seedling-requisitos-mínimos">Requisitos</a>&nbsp;|&nbsp;
   <a href="#rocket-principais-tecnologias-utilizadas">Tecnologias</a>&nbsp;|&nbsp;
   <a href="#package-como-baixar-e-executar-o-projeto">Baixar e Executar</a>&nbsp;|&nbsp;
@@ -26,14 +25,13 @@ O projeto **Bolt** é uma aplicação web com o propósito de executar depósito
 
 ## :information_source: Visão Geral
 
-O projeto proposto pela **Hubert** foi para a participação do processo seletivo para a vaga de Desenvolvedor(a) Front-end Pleno Angular | React. 
+O projeto proposto pela **Bolt** foi para a participação do processo seletivo para a vaga de Desenvolvedor(a) Front-end Next.js Pleno. 
 
 Nele, foi desenvolvido uma aplicação web utilizando a lógica de programação com Typescript, a criação das funcionalidades e estrutura para
-requisições à API da aplicação, que para isso foi utilizado o Axios para buscar todos os produtos disponíveis do e-comerce.
+requisições à API da aplicação, que para isso foi utilizado o Server Actions para buscar todos as operações feitas pelo usuário.
 
 
-
-Além disso,para a construção dessa aplicação foi utilizado os seguintes conceitos:
+Além disso,para a construção dessa aplicação foi utilizado os seguintes tecnologias:
 
 - HTML;
 - React
@@ -48,56 +46,57 @@ Além disso,para a construção dessa aplicação foi utilizado os seguintes con
 - Jest;
 - Storybook;
 - HeroIcons
+- Docker
+- MySql
 
 ---
 
-- **Página Inicial e Dashboard**:
+- **Página de Login**:
 
 <div align="center" >
-   <img src="https://imgur.com/PEcB1oe.png" width="220">______
-  <img src="https://imgur.com/vpVrnQM.gif" width=220>______
-  <img src="https://imgur.com/vL6uCzU.png" width=250>
+   <img src="https://imgur.com/cWvqILN.png" width="420">______
+   <img src="https://imgur.com/vpVrnQM.png" width=420>
+   
 </div>
 
+
 ---
 
-- **Página de Detalhes do Produto**:
+- **Página da Dashboard Financeira**:
 
 <div align="center" >
-  <img src="https://i.imgur.com/V84TDke.png" width="560">
+ <img src="https://imgur.com/5244Cdz.png" width=560>
 </div>
 
 ---
 
 ## :interrobang: Objetivo
 
-Esse teste tem como objetivo, desenvolver as funcionalidades de uma tabela de produtos de um e-comerce, além disso, aplicar animações CSS, responsividade
-das telas, testes unitários, componentes organizados, HTML semântico e recursos do próprio React.
+Esse teste tem como objetivo, desenvolver as funcionalidades de Depósito e transferência de saldo,
+além disso aplicar testes unitários, componentes organizados, HTML semântico e recursos do próprio Next.js para roteamento.
+
 
 Assim, nesse projeto é possível:
+1. Registrar uma conta utilizando Nome de Usuário, Senha e email.
+2. Fazer login através do usuário e senha cadastrados.
+3. Fazer o depósito para própria conta
+4. Visualizar o saldo alterando a cada operação
+5. Fazer uma transferência para uma usuário existente através do ID
+6. Validar se realmente tem saldo para fazer a transferência
+7. Reverter Depósito e Transferência
+8. O Usuário que recebeu a transferência, visualizar o saldo atualizado ou reversão de operação
 
-1. Verificar todos os produtos disponíveis através de uma tabela;
-2. Navegar entre os produtos através da paginação;
-3. Visualizar animações CSS, como spinner de Loading;
-4. Filtrar a tabela pelo nome do produto;
-5. Limpar filtro para trazer todos os dados novamente;
-6. Navegar entre as as telas com uma animação suave de navegação;
-7. Ver detalhadamente as especificações do produto;
 
 ---
 
 ## :book: Documentação
 
-Para este teste foi utilizado a documentação pelo Storybook para facilitar a visualização dos componentes totalmente separados dos outros e do próprio código, porém mantendo estilos e animações CSS. Além disso é possivel observar todas as propriedades que deverão ser passadas ou não, para aquele componente funcionar.
+Para este teste foi utilizado a documentação pelo Storybook para facilitar a visualização dos componentes totalmente separados dos outros e do próprio código, porém mantendo estilos. Além disso é possivel observar todas as propriedades que deverão ser passadas ou não, para aquele componente funcionar.
  
  <div align="center" >
-  <img src="https://i.imgur.com/viatlP1.png" width="560">
+  <img src="https://imgur.com/DFSTMJL.png" width="560">
 </div>
 
----
-Segue abaixo o vídeo completo da documentação feita para o teste **Hubert**
-
-[**Link do vídeo completo sobre a documentação do projeto**](https://i.imgur.com/IKMFdFR.mp4)
 
 ---
 
@@ -106,23 +105,9 @@ Segue abaixo o vídeo completo da documentação feita para o teste **Hubert**
 Para a confiabilidade das funcionalidades, foi desenvolvido testes unitarios em cada componente e página da aplicação, para isso foi utilizado o Jest como principal ferramenta de teste. A aplicação foi importante para verificar e prevenir futuros bugs no sistema.
 
  <div align="center" >
-  <img src="https://i.imgur.com/EelNCxO.png" width="560">
+  <img src="https://i.imgur.com/KgkZjhN.png" width="560">
 </div>
 
-
-Segue o link abaixo para verificar os testes feitos com mais detalhes:
-
-[**Link dos testes unitários do projeto**](https://guilherme-vilela.notion.site/Hubert-Testes-Unit-rios-4762a39a583940608f337a5b54a5ec29)
-
----
-
-## :clock1: Scrum
-
-Para organizar as tarefas mais importantes a serem feitas e determinação do tempo de cada atividade, foi utilizado o Scrum.
-
-<div align="center" >
-  <img src="https://i.imgur.com/9tZDjFk.png" width="560">
-</div>
 
 ---
 
@@ -132,7 +117,9 @@ Para organizar as tarefas mais importantes a serem feitas e determinação do te
 - Node.js
 - React
 - TypeScript
-- Yarn(ou NPM)
+- NPM
+- Docker
+- MySql
 
 
 ---
@@ -141,21 +128,20 @@ Para organizar as tarefas mais importantes a serem feitas e determinação do te
 
 O projeto foi desenvolvido utilizando as seguintes tecnologias
 
-- [Vite](https://vitejs.dev/)
+
 - [React](https://pt-br.reactjs.org/)
 - [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+- [Next.Js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Yarn](https://classic.yarnpkg.com/blog/2017/05/12/introducing-yarn/)
+- [NPM](https://www.npmjs.com/)
 - [NodeJS](https://nodejs.org/en/)
-- [Styled Components](https://www.styled-components.com/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Axios](https://axios-http.com/ptbr/docs/intro)
+- [TailwindCSS](https://tailwindcss.com/)
 - [React Hooks](https://reactjs.org/docs/hooks-intro.html)
-- [React-Icons](https://react-icons.github.io/react-icons/)
+- [HeroIcons](https://heroicons.com/)
 - [Jest](https://jestjs.io/pt-BR/)
 - [Storybook](https://storybook.js.org/)
-
-
+- [MySql](https://www.mysql.com/)
+- [Docker](https://www.docker.com/)
 
 ---
 
@@ -164,51 +150,67 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
 - Clonar o projeto:
 
  ```bash
-   git clone https://github.com/guirvilela/Hubert-Test
+   git clone https://github.com/guirvilela/test-bolt-front-end
   ```
   
-- É necessário a instalação do yarn de acordo com seu sistema operacional, para isso veja como no site do [Yarn](https://yarnpkg.com/getting-started)
+- É necessário a instalação do NPM de acordo com seu sistema operacional, para isso veja como no site do [NPM](https://www.npmjs.com/)
 - Instalação das dependências:
   - Execute o comando abaixo dentro da pasta do projeto
   
   ```bash
-    yarn
+    npm i
   ```
   
 - Execução - Abra a pasta do projeto com alguma IDE(Vscode) ou simplesmente abra o terminal na pasta do projeto e execute o comando abaixo:
 
   ```bash
-     yarn dev
+     npm run dev
   ```
   
 - Documentação:
   - Para acessar a documentação do storybook, execute o seguinte comando dentro do projeto:
 
   ```bash
-      yarn storybook
-  ```
-  - Caso a documentação não abra corretamente, tente o seguinte comando:
-  
-  -Windows (PowerShell)
-  
-  ```bash
-      $env:NODE_OPTIONS="--openssl-legacy-provider"
-  ```
-  -Linux
-   ```bash
-      export NODE_OPTIONS=--openssl-legacy-provider
+  npm run storybook
   ```
   
 
 - Testes: 
   - Para rodar todos os testes da aplicação, execute o seguindo comando dentro do projeto:
   ```bash
-      yarn test
+      npm run test
   ```
-  
+
+- Configuração Do MySql
+  Para configurar o banco de dados MySQL, execute os seguintes comandos para criar as tabelas necessárias:
+
+ ```bash
+  CREATE TABLE operations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  userId INT,
+  type VARCHAR(255) NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  senderId INT,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  balanceAfter DECIMAL(10,2),
+  recipientId INT,
+  revertId INT,
+  recipientName VARCHAR(255)
+  );
+
+  CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  balance DECIMAL(10,2) DEFAULT 0.00
+  );
+  ```
+
+- Docker
+Iniciar o container do Docker: Use o docker-compose up para iniciar o front-end e o back-end no Docker. Certifique-se de ter um docker-compose.yml configurado adequadamente com a integração entre os serviços.
+Verificar os containers: Após a execução, você pode verificar os containers com docker ps para garantir que tudo está funcionando corretamente.
 ---
-
-
 
 
 Quanto as instruções de como rodar o projeto, fiz um tópico exclusivo na sessão <a href="#package-como-baixar-e-executar-o-projeto">Baixar e Executar</a>. 
