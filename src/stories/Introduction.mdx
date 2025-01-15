@@ -32,14 +32,14 @@ export const RightArrow = () => (
       Ao acessar o site, você pode realizar o <strong>login</strong> utilizando seu usuário e senha ou fazer um novo <strong>registro</strong> caso ainda não tenha uma conta.
     </p>
     <p>
-      Após o login, você terá acesso a funcionalidades requeridas no Desafio, são elas:
+      Após o login, você terá acesso às funcionalidades requeridas no desafio. São elas:
     </p>
     <ul>
       <li><strong>Depósitos</strong>: Os usuários podem realizar depósitos em suas contas. O sistema automaticamente atualiza o saldo disponível após a transação.</li>
       <li><strong>Histórico de Operações</strong>: A plataforma mantém um registro completo das transações realizadas, incluindo depósitos e transferências, permitindo aos usuários consultar suas movimentações passadas.</li>
-      <li><strong>Reverter Depósito</strong>: Caso o usuário cometa um erro ao realizar um depósito, ele tem a opção de reverter a operação, garantindo flexibilidade para correções. <strong>Mas apenas a operação mais recente</strong></li>
-      <li><strong>Transferências</strong>: Os usuários podem transferir valores para outros usuários, com validação automática do saldo disponível para garantir que o envio não exceda o valor disponível. Através do ID do usuário</li>
-      <li><strong>Cancelar Transferência</strong>: Apenas o usuário que iniciou a transferência tem permissão para cancelá-la, o que proporciona controle sobre suas transações.</li>
+      <li><strong>Reverter Depósito</strong>: Caso o usuário identifique inconsistência no depósito, ele tem a opção de reverter a operação, garantindo flexibilidade para correções. <strong>Importante citar que a reversão estará disponível apenas na operação mais recente.</strong></li>
+      <li><strong>Transferências</strong>: Os usuários podem transferir valores para outros usuários, com validação automática do saldo disponível para garantir que o envio não exceda o valor disponível. As transferência ocorrem identificando os usuários por seu ID, que está disponível para consulta no Dashboard Financeiro, próximo ao nome do usuário.</li>
+      <li><strong>Cancelar Transferência</strong>: Apenas o usuário que iniciou a transferência tem permissão para cancelá-la, o que proporciona controle sobre suas transações. <strong>Importante citar que a reversão estará disponível apenas na operação mais recente.</strong></li>
     </ul>
 
    <p>
@@ -48,17 +48,19 @@ export const RightArrow = () => (
 <ul>
   <li><strong>React</strong> para a construção da interface do usuário;</li>
   <li><strong>Next.js</strong> como framework de renderização do lado do servidor;</li>
-  <li><strong>Tailwind CSS</strong> para estilização </li>
+  <li><strong>Tailwind CSS</strong> para estilização; </li>
   <li><strong>Hooks</strong> e <strong>componentização</strong> para reutilização de código e organização;</li>
   <li><strong>Server Actions</strong> para otimizar a comunicação entre o frontend e o backend;</li>
   <li><strong>Testes unitários</strong> para garantir a qualidade e estabilidade do sistema.</li>
+  <li><strong>Docker</strong> para permissões de acesso ao banco de dados.</li>
+  <li><strong>MySQL</strong> para armazenamento de dados.</li>
 </ul>
 
   </div>
 
   <h3>Como iniciar o projeto</h3>
 <ol>
-  <li><strong>Instalar dependências:</strong> Execute o comando <code>npm install</code> para instalar todas as dependências do projeto.</li>
+  <li><strong>Instalar dependências:</strong> No terminal, execute o comando <code>npm install</code> para instalar todas as dependências do projeto.</li>
   <li><strong>Iniciar o servidor de desenvolvimento:</strong> Execute <code>npm run dev</code> para iniciar o servidor de desenvolvimento em <strong>http://localhost:3000</strong>.</li>
 </ol>
 
