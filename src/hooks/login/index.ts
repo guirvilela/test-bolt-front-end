@@ -84,7 +84,7 @@ export function useHomeController() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push("/dashboard");
+        router.push("/");
         setUser(data);
         handleSetUsername("");
         handleSetPassword("");
